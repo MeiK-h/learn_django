@@ -1,9 +1,12 @@
-import re
 import os
+import re
 from shutil import rmtree
-from django.db import models
+
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class Jplag(object):
@@ -62,10 +65,15 @@ class Checker(models.Model):
 
 class Code(models.Model):
     checker = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    name = models.CharField(max_length=64)
-    code = models.TextField()
+    name = models.CharField(max_length=64, validators=[check_name])
+    code = models.FileField(upload_to='codes/')
 
-    def check_name(self):
-        pattern = re.compile(u'^[.0-9a-zA-Z\u4e00-\u9fa5]+$')
-        match = pattern.search(self.name)
-        return True if match else False
+
+def check_name(name):
+    pattern = re.compile(u'^[.0-9a-zA-Z\u4e00-\u9fa5]+$')
+    match = pattern.search(name)
+    if not match:
+        raise ValidationError(
+            _('%(name) 不合法'),
+            params={'name': name},
+        )
