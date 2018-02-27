@@ -1,0 +1,12 @@
+{% if checker_list %}
+<ul>
+    {% for checker in checker_list %}
+    <li>
+        <a href="{% url 'jplag:checker' checker.id %}">{{ checker.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No checker are available.</p>
+{% endif %}
+<a href="{% url 'jplag:new_checker' %}">new checker</a>

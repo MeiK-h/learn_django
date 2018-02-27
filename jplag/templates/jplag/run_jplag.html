@@ -1,0 +1,8 @@
+<pre>
+    {{ rst.message }}
+</pre>
+{% if rst.state %}
+<p>查重成功 <a href="{{ result_url }}">查看结果</a></p>
+{% else %}
+<p>查重失败</p>
+{% endif %}

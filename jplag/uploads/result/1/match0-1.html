@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+ <TITLE>10031657.cpp</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <script type="text/javascript">
+  <!--
+   function ZweiFrames(URL1,F1,URL2,F2)
+   {
+    parent.frames[F1].location.href=URL1;
+    parent.frames[F2].location.href=URL2;
+   }
+  //-->
+  </script>
+</HEAD>
+<BODY BGCOLOR="#ffffff" style="margin-left:25">
+<HR>
+<H3><CENTER>10031657.cpp</CENTER></H3><HR>
+<PRE>
+#include &lt;iostream&gt;
+<A NAME="0"></A>
+using namespace std;
+#include&lt;bits/stdc++.h&gt;
+<FONT color="#0000ff"><div style="position:absolute;left:0"><A HREF="javascript:ZweiFrames('match0-0.html#0',2,'match0-top.html#0',1)"><IMG SRC="back.gif" ALT="other" BORDER="0" ALIGN="left"></A></div><B>int str1[1000100],str2[1000100];
+int Next[1000100];
+int len1,len2,flag,cnt;
+void getNext()
+{
+    int i=0,j=-1;
+    Next[0]=-1;
+    while(i&lt;=len2)
+    {
+        if(j==-1||str2[i]==str2[j])
+        {
+            i++;
+            j++;
+            Next[i]=j;
+        }
+        else j=Next[j];
+    }
+}
+void kmp()
+{
+    int i=0,j=0,cnt=0;
+    getNext();
+    while(i&lt;len1)
+    {
+        if(j==-1||str1[i]==str2[j])
+        {
+            i++,j++;
+        }
+        else j=Next[j];
+
+    if(j==len2)
+    {
+        cnt++;
+        flag=i;
+    }
+
+    }
+    if(cnt==1)
+        printf(&quot;%d %d\n&quot;,flag-len2+1,flag);
+    else printf(&quot;-1\n&quot;);
+}
+int main()
+{
+    int i;
+    cin&gt;&gt;len1;
+        for(i=0;i&lt;len1;i++)
+        {
+            cin&gt;&gt;str1[i];
+        }
+    cin&gt;&gt;len2;
+
+        for(i=0;i&lt;len2;i++)
+        {
+            cin&gt;&gt;str2[i];
+        }
+    kmp();
+}</B></FONT>
+
+</PRE>
+</BODY>
+</HTML>

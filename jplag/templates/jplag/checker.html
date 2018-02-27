@@ -1,0 +1,33 @@
+<h1>{{ checker.title }}</h1>
+
+{% if error_message %}
+<p>
+    <strong>{{ error_message }}</strong>
+</p>
+{% endif %}
+
+{% for code in checker.code_set.all %}
+<label><a href="{{ code.code.url }}">{{ code.code.name }}</a> - {{ code.c_time }}</label>
+<a href="{% url 'jplag:delete_code' pk1=checker.id pk2=code.id %}">删除</a>
+<br />
+{% endfor %}
+
+<a href="{% url 'jplag:upload_code' pk=checker.id %}">上传代码</a>  
+<a href="/uploads/result/{{ checker.id }}/index.html">查重结果</a>
+<form action="{% url 'jplag:run_jplag' pk=checker.id %}">
+    {% csrf_token %}
+    <select name="language">
+        <option value ="c/c++">c/c++</option>
+        <option value ="java17">java17</option>
+        <option value ="java15">java15</option>
+        <option value ="java15dm">java15dm</option>
+        <option value ="java12">java12</option>
+        <option value ="java11">java11</option>
+        <option value ="python3">python3</option>
+        <option value ="c#">c#</option>
+        <option value ="char">char</option>
+        <option value ="text">text</option>
+        <option value ="scheme">scheme</option>
+    </select>
+    <input type="submit" value="查重" />
+</form>
