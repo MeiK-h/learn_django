@@ -25,7 +25,7 @@ SECRET_KEY = '+bdwuey7i57ra!dqh$h61s!3k3n3i%)7z1d(mtlw644qdm1b92'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -123,3 +123,5 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'jplag', 'uploads')
 
 MEDIA_URL = '/uploads/'
+
+LOGIN_URL = '/login/'

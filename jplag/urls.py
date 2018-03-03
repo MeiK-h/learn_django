@@ -10,5 +10,6 @@ urlpatterns = [
      path('new_checker/', views.new_checker, name='new_checker'),
      path('<int:pk1>/<int:pk2>/delete_code/', views.delete_code, name='delete_code'),
      path('<int:pk>/upload_code/', views.upload_code, name='upload_code'),
-     path('<int:pk>/run/', views.run_jplag, name='run_jplag')
+     path('<int:pk>/run/', views.run_jplag, name='run_jplag'),
+     path('login/', views.login, name='login'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

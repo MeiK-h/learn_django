@@ -14,3 +14,4 @@ def file_type_valid(value):
 
 class CodeForm(forms.Form):
     code = forms.FileField(validators=[file_type_valid])
+
