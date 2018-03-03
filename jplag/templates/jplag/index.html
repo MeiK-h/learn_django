@@ -1,3 +1,9 @@
+{% if user.is_authenticated %}
+{{ user.username }}
+<a href="{% url 'jplag:logout' %}">logout</a>
+{% else %}
+<a href="{% url 'jplag:login' %}">login</a>
+{% endif %}
 {% if checker_list %}
 <ul>
     {% for checker in checker_list %}

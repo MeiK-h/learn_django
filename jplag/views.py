@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 from django.contrib import auth
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -75,7 +75,7 @@ def run_jplag(request, pk):
 
 
 def login(request):
-    redirect_to = request.GET.get('next')
+    redirect_to = request.GET.get('next', '/')
     if request.method != 'POST':
         form = AuthenticationForm()
     else:
@@ -84,3 +84,8 @@ def login(request):
             auth_login(request, form.user_cache)
             return HttpResponseRedirect(redirect_to)
     return render(request, 'jplag/login.html', {'form': form})
+
+
+def logout(request):
+    auth_logout(request)
+    return HttpResponseRedirect(reverse('jplag:index'))

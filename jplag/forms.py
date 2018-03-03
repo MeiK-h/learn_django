@@ -15,3 +15,7 @@ def file_type_valid(value):
 class CodeForm(forms.Form):
     code = forms.FileField(validators=[file_type_valid])
 
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(max_length=30, required='required')
+    password = forms.CharField(max_length=30, required='required')
