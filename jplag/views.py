@@ -10,7 +10,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
-from .forms import CodeForm
+from .forms import CodeForm, RegisterForm
 from .models import Checker, Code, Jplag
 
 
@@ -89,3 +89,13 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return HttpResponseRedirect(reverse('jplag:index'))
+
+
+def register(request):
+    if request.method != 'POST':
+        form = RegisterForm()
+    else:
+        form = RegisterForm(data=request.POST)
+        if form.is_valid():
+            return HttpResponse('Hello World!')
+    return render(request, 'jplag/register.html', {'form': form})

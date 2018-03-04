@@ -18,4 +18,4 @@ class CodeForm(forms.Form):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=30, required='required')
-    password = forms.CharField(max_length=30, required='required')
+    password = forms.CharField(max_length=30, required='required', widget=forms.PasswordInput)

@@ -13,4 +13,5 @@ urlpatterns = [
      path('<int:pk>/run/', views.run_jplag, name='run_jplag'),
      path('login/', views.login, name='login'),
      path('logout/', views.logout, name='logout'),
+     path('register/', views.register, name='register'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
